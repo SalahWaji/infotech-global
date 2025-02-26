@@ -20,19 +20,8 @@ const projectData = {
 
 // Initialize AOS and setup modal functionality
 document.addEventListener('DOMContentLoaded', () => {
-    // TODO: EmailJS Setup Instructions
-    // 1. Create an account at https://www.emailjs.com/
-    // 2. Add a new email service (e.g., Gmail, Outlook, etc.)
-    // 3. Create an email template with the following variables:
-    //    - to_email (will be set to info@infotechgs.com)
-    //    - from_name (sender's name)
-    //    - from_email (sender's email)
-    //    - organization (sender's organization)
-    //    - phone (sender's phone)
-    //    - message (sender's message)
-    // 4. Get your EmailJS public key, service ID, and template ID
-    // 5. Replace the placeholders below with your actual values
-    emailjs.init("YOUR_PUBLIC_KEY");
+
+    emailjs.init("vmv4mwKXDnAFiUv9J");
 
     AOS.init({
         duration: 800,
@@ -68,14 +57,58 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 );
                 
-                // Show success message
-                alert('Thank you for your message! We will get back to you soon.');
+                // Create or get success message element
+                let successMessage = form.querySelector('.success-message');
+                if (!successMessage) {
+                    successMessage = document.createElement('div');
+                    successMessage.className = 'success-message';
+                    successMessage.style.backgroundColor = '#d4edda';
+                    successMessage.style.color = '#155724';
+                    successMessage.style.padding = '10px 15px';
+                    successMessage.style.borderRadius = '4px';
+                    successMessage.style.marginTop = '15px';
+                    successMessage.style.textAlign = 'center';
+                    successMessage.style.fontWeight = '500';
+                    form.appendChild(successMessage);
+                }
+                
+                // Show success message in the form
+                successMessage.textContent = 'Thank you for your message! We will get back to you soon.';
+                successMessage.style.display = 'block';
                 
                 // Reset form
                 form.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
             } catch (error) {
                 console.error('Error sending email:', error);
-                alert('Sorry, there was an error sending your message. Please try again later.');
+                
+                // Create or get error message element
+                let errorMessage = form.querySelector('.error-message');
+                if (!errorMessage) {
+                    errorMessage = document.createElement('div');
+                    errorMessage.className = 'error-message';
+                    errorMessage.style.backgroundColor = '#f8d7da';
+                    errorMessage.style.color = '#721c24';
+                    errorMessage.style.padding = '10px 15px';
+                    errorMessage.style.borderRadius = '4px';
+                    errorMessage.style.marginTop = '15px';
+                    errorMessage.style.textAlign = 'center';
+                    errorMessage.style.fontWeight = '500';
+                    form.appendChild(errorMessage);
+                }
+                
+                // Show error message in the form
+                errorMessage.textContent = 'Sorry, there was an error sending your message. Please try again later.';
+                errorMessage.style.display = 'block';
+                
+                // Hide error message after 5 seconds
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 5000);
             } finally {
                 // Reset button state
                 submitButton.textContent = originalText;
