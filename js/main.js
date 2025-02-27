@@ -1,12 +1,13 @@
 // Project Data
 const projectData = {
     'trutrade': {
-        title: 'TruTrade Solutions Accreditation Platform',
-        image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-        challenge: 'TruTrade Solutions needed a streamlined certification process for CBP Partners, facing challenges with manual documentation and verification procedures.',
-        solution: 'We developed a custom accreditation platform that automates the certification workflow, integrates digital document verification, and provides real-time status tracking.',
-        results: 'Reduced certification processing time by 60%, improved accuracy rates to 99.9%, and increased partner satisfaction scores by 45%.',
-        technologies: ['React', 'Node.js', 'MongoDB', 'AWS', 'Docker']
+        title: 'TruTrade Solutions CBP Accreditation Platform',
+        images: ['assets/TTS img1.png', 'assets/TTSimg2.png', 'assets/TTSimg3.png'],
+        mainImage: 'assets/TTS img1.png',
+        challenge: 'TruTrade Solutions was selected by U.S. Customs and Border Protection (CBP) as one of only five authorized partner accreditors nationwide. They needed a comprehensive digital platform to accept applications, process payments, and manage the entire accreditation workflow. The system required robust backend capabilities for application processing, unique identifier generation, and secure reporting to CBP, all while maintaining regulatory compliance and providing an excellent user experience.',
+        solution: 'Our team developed a streamlined accreditation platform by leveraging JotForm\'s powerful capabilities, customized to meet TruTrade\'s exact specifications: Intuitive Application Interface with clear instructions and intelligent form logic, Secure Payment Processing with Stripe payment gateway for seamless transactions, Automated Workflow Management with multi-stage approval and status tracking, Customized Backend System for filtering applications and generating reports, and a Dedicated Accreditation Website that seamlessly integrates the application platform. We prioritized security, compliance, and user experience throughout development.',
+        results: 'The implementation of the TruTrade Solutions Accreditation Platform delivered significant operational improvements: Successfully processed multiple accreditation requests with 100% system reliability, eliminated paperwork and manual data entry, minimizing human error, provided real-time visibility into application status and comprehensive reporting capabilities, established TruTrade as a technological leader among CBP\'s authorized accreditors, and created a scalable solution capable of handling increasing application volumes as the program expands.',
+        technologies: ['JotForm (Enterprise)', 'Stripe Payment Processing', 'Custom JavaScript', 'Responsive Web Design', 'Automated Reporting']
     },
     'cabra': {
         title: 'Cabra Ranch Business Transformation',
@@ -171,7 +172,61 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!project) return;
 
         modalTitle.textContent = project.title;
-        modalImage.src = project.image;
+        
+        // Get gallery elements
+        const imageGallery = document.getElementById('imageGallery');
+        const galleryNav = document.getElementById('galleryNav');
+        
+        // Clear previous gallery content
+        imageGallery.innerHTML = '';
+        galleryNav.innerHTML = '';
+        
+        // Handle both single image and multiple images
+        if (project.images && project.images.length > 0) {
+            // Set main image
+            modalImage.src = project.mainImage || project.images[0];
+            
+            // Create gallery if there are multiple images
+            if (project.images.length > 1) {
+                // Show gallery container
+                imageGallery.style.display = 'flex';
+                galleryNav.style.display = 'flex';
+                
+                // Create thumbnail navigation
+                project.images.forEach((imgSrc, index) => {
+                    const thumbBtn = document.createElement('button');
+                    thumbBtn.className = 'gallery-thumb';
+                    thumbBtn.innerHTML = `<img src="${imgSrc}" alt="Project image ${index + 1}">`;
+                    
+                    // Mark the main image as active
+                    if (imgSrc === (project.mainImage || project.images[0])) {
+                        thumbBtn.classList.add('active');
+                    }
+                    
+                    // Add click event to switch main image
+                    thumbBtn.addEventListener('click', () => {
+                        modalImage.src = imgSrc;
+                        // Update active state
+                        document.querySelectorAll('.gallery-thumb').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        thumbBtn.classList.add('active');
+                    });
+                    
+                    galleryNav.appendChild(thumbBtn);
+                });
+            } else {
+                // Hide gallery elements if only one image
+                imageGallery.style.display = 'none';
+                galleryNav.style.display = 'none';
+            }
+        } else {
+            // Handle projects with just a single image property
+            modalImage.src = project.image;
+            imageGallery.style.display = 'none';
+            galleryNav.style.display = 'none';
+        }
+        
         modalChallenge.textContent = project.challenge;
         modalSolution.textContent = project.solution;
         modalResults.textContent = project.results;
