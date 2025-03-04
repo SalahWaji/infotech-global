@@ -58,6 +58,18 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     color: var(--primary);
     text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 120px;
+    width: auto;
+    max-width: 480px;
+    margin-top: -35px;
+    margin-bottom: -35px;
+    object-fit: contain;
+    object-position: left center;
 }
 
 .nav-links {
@@ -216,17 +228,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .service-card {
-    background: var(--white);
+    background: #f0f7ff;
     padding: 2rem;
     border-radius: 15px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .service-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 .service-card i {

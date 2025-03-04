@@ -10,12 +10,13 @@ const projectData = {
         technologies: ['JotForm (Enterprise)', 'Stripe Payment Processing', 'Custom JavaScript', 'Responsive Web Design', 'Automated Reporting']
     },
     'cabra': {
-        title: 'Cabra Ranch Business Transformation',
-        image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-        challenge: 'Cabra Ranch needed to modernize their operations, struggling with manual processes and inefficient business workflows.',
-        solution: 'Implemented comprehensive digital transformation including automated proposal systems, inventory management, and business process automation.',
-        results: 'Achieved 40% reduction in operational costs, 75% faster proposal generation, and 200% increase in process efficiency.',
-        technologies: ['Python', 'PostgreSQL', 'Azure', 'Power BI', 'REST APIs']
+        title: 'Cabra Ranch Customer Relationship Management System',
+        images: ['assets/imgA.png', 'assets/img1.png'],
+        mainImage: 'assets/imgA.png',
+        challenge: 'Cabra Ranch, a premier goat farm in Highgate, Jamaica, needed a comprehensive solution to effectively manage their growing customer base. They lacked a centralized system to track customer information, purchasing patterns, and product preferences, resulting in missed sales opportunities and inefficient business processes. The ranch required a custom CRM that could handle their unique agricultural business needs while being user-friendly for their staff.',
+        solution: 'Our team developed a tailored Customer Relationship Management (CRM) system specifically designed for Cabra Ranch\'s agricultural business model:\n<b>Comprehensive Contact Management:</b> Created a centralized database to store and organize detailed customer information, including contact details and communication history.\n<b>Purchase Tracking System:</b> Implemented functionality to record and analyze customer transaction history across all product lines.\n<b>Preference Profiling:</b> Developed a system to capture and categorize customer product preferences and buying patterns.\n<b>Customized Reporting Tools:</b> Built intuitive dashboards and reporting features to provide actionable business insights.\n<b>Scalable Architecture:</b> Designed the system to accommodate business growth and increasing data volumes.\nWe focused on creating an intuitive interface that would be approachable for all staff members while ensuring robust data management capabilities beneath the surface.',
+        results: 'The implementation of the Cabra Ranch CRM system delivered significant business improvements:\n<b>Enhanced customer retention</b> through improved relationship management and timely follow-ups.\n<b>Increased sales</b> by identifying cross-selling and upselling opportunities based on purchase history.\n<b>Streamlined marketing efforts</b> by enabling targeted communications based on customer preferences.\n<b>Improved business decision-making</b> through access to comprehensive customer data analytics.\n<b>Reduced administrative workload</b> and eliminated redundant data entry tasks.',
+        technologies: ['Responsive user interface design', 'Advanced data security protocols', 'Automated reporting and analytics tools', 'Cloud-based deployment', 'Integration capabilities', 'Custom API development']
     }
 };
 
@@ -228,8 +229,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         modalChallenge.textContent = project.challenge;
-        modalSolution.textContent = project.solution;
-        modalResults.textContent = project.results;
+        
+        // Always use innerHTML for solution and results to properly render HTML
+        modalSolution.innerHTML = project.solution.replace(/\n/g, '<br>');
+        modalResults.innerHTML = project.results.replace(/\n/g, '<br>');
         
         // Clear and populate technologies
         modalTech.innerHTML = project.technologies
